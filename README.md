@@ -33,6 +33,10 @@ All games support **Easy / Normal / Hard** difficulty and save high scores to fl
 |Buttons|Tactile switches|3× momentary push buttons|
 |Audio|Passive piezo buzzer|NOT active buzzer|
 |Power|Micro-USB or 3.7V LiPo|LiPo needs a TP4056 charge module|
+|Capacitor|100µF electrolytic (×1)|Decoupling cap across ESP32 3.3V and GND power pins|
+|Capacitor|100nF ceramic(104) (×1)|Across OLED VCC and GND — stabilizes display power rail|
+|Resistors|4.7kΩ (×2)|I2C pull-ups: GPIO 22 (SCL) to 3.3V, GPIO 21 (SDA) to 3.3V|
+|Resistor|10kΩ (×1)|Pull-up on Joystick SW (GPIO 25) to 3.3V|
 
 > ⚠️ \*\*Passive buzzer only.\*\* An active buzzer will not produce tones — only a fixed click.
 
@@ -200,99 +204,42 @@ retrobox-esp32/
 
 ## 🐛 Common Issues
 
-\## 🐛 Known Issues \& Limitations
+### Hardware
 
+|Issue|Cause|Fix|
+|-|-|-|
+|Screen flickers or shows garbage|Loose SDA/SCL wire|Re-seat the OLED connections at GPIO 21/22|
+|Screen blank after flashing|Wrong I2C address|Change `OLED\_ADDR` from `0x3C` to `0x3D` in the `.ino`|
+|Screen blank, address correct|OLED on 5V|Move OLED VCC to the **3.3V** pin — 5V will damage it|
+|Joystick cursor drifts at rest|ADC noise / clone module|Increase `JOY\_DEAD` from `400` to `600–800`|
+|Joystick feels sluggish|Dead zone too wide|Decrease `JOY\_DEAD` to `300`|
+|Buttons register double presses|No hardware debounce|Solder a 100nF capacitor between the button pin and GND|
+|No sound at all|Active buzzer used|Replace with a **passive** buzzer|
+|Sound plays but wrong pitch|Wrong pin|Check `PIN\_BUZZER` matches your actual wiring|
+|ESP32 won't enter upload mode|Auto-reset not triggering|Hold the **BOOT** button while clicking Upload, release after "Connecting…" appears|
+|Upload fails on Linux/Mac|Serial port permissions|Run `sudo chmod 666 /dev/ttyUSB0` (or your port)|
 
+### Software / Firmware
 
-\### Hardware
+|Issue|Cause|Fix|
+|-|-|-|
+|Compilation error: "too large for RAM"|Too many games enabled|Disable `DOOM` and/or `MARIO` in `games\_config.h` — they use the most RAM|
+|Compilation error after adding custom game|Missing dispatcher entry|Re-read Step 5 of `ADDING\_A\_GAME.md` — all 5 dispatchers must have a `case`|
+|High scores reset on every boot|Preferences namespace collision|Make sure no two games use the same key string in `prefs.putInt()`|
+|Game crashes / reboots mid-play|Stack overflow or heap exhaustion|Reduce `MAX\_LEN` / array sizes in your custom game, or disable another game to free RAM|
+|Dungeon Crawler freezes on boot|`malloc()` failed|Not enough heap — disable one or two other games|
+|DOOM runs slowly|Normal on lower clock speeds|Set ESP32 CPU frequency to **240 MHz**: Tools → CPU Frequency → 240MHz|
+|Menu shows blank game name slot|`GAME\_NAMES` array out of sync|Make sure your game's name entry matches its position in the `GameID` enum|
+|Difficulty setting not saving|Expected behavior|Difficulty resets to Normal on reboot by design — selected fresh each game launch|
 
+### Clone Hardware Quirks
 
-
-\## 🐛 Known Issues \& Limitations
-
-
-
-\### Hardware
-
-
-
-| Issue                            | Cause                     | Fix                                                                                 |
-
-| -------------------------------- | ------------------------- | ----------------------------------------------------------------------------------- |
-
-| Screen flickers or shows garbage | Loose SDA/SCL wire        | Re-seat the OLED connections at GPIO 21/22                                          |
-
-| Screen blank after flashing      | Wrong I2C address         | Change `OLED\_ADDR` from `0x3C` to `0x3D` in the `.ino`                              |
-
-| Screen blank, address correct    | OLED on 5V                | Move OLED VCC to the \*\*3.3V\*\* pin — 5V will damage it                               |
-
-| Joystick cursor drifts at rest   | ADC noise / clone module  | Increase `JOY\_DEAD` from `400` to `600–800`                                         |
-
-| Joystick feels sluggish          | Dead zone too wide        | Decrease `JOY\_DEAD` to `300`                                                        |
-
-| Buttons register double presses  | No hardware debounce      | Solder a 100nF capacitor between the button pin and GND                             |
-
-| No sound at all                  | Active buzzer used        | Replace with a \*\*passive\*\* buzzer                                                   |
-
-| Sound plays but wrong pitch      | Wrong pin                 | Check `PIN\_BUZZER` matches your actual wiring                                       |
-
-| ESP32 won't enter upload mode    | Auto-reset not triggering | Hold the \*\*BOOT\*\* button while clicking Upload, release after “Connecting…” appears |
-
-| Upload fails on Linux/Mac        | Serial port permissions   | Run `sudo chmod 666 /dev/ttyUSB0` (or your port)                                    |
-
-
-
-\---
-
-
-
-\### Software / Firmware
-
-
-
-| Issue                                      | Cause                             | Fix                                                                                             |
-
-| ------------------------------------------ | --------------------------------- | ----------------------------------------------------------------------------------------------- |
-
-| Compilation error: "too large for RAM"     | Too many games enabled            | Disable `DOOM` and/or `MARIO` in `games\_config.h` — they use the most RAM                       |
-
-| Compilation error after adding custom game | Missing dispatcher entry          | Re-read Step 5 of `ADDING\_A\_GAME.md` — all 5 dispatchers must have a `case`                     |
-
-| High scores reset on every boot            | Preferences namespace collision   | Make sure no two games use the same key string in `prefs.putInt()`                              |
-
-| Game crashes / reboots mid-play            | Stack overflow or heap exhaustion | Reduce `MAX\_LEN` / array sizes in your custom game, or disable another game to free RAM         |
-
-| Dungeon Crawler freezes on boot            | `malloc()` failed                 | Not enough heap — disable one or two other games                                                |
-
-| DOOM runs slowly                           | Normal on lower clock speeds      | Set ESP32 CPU frequency to \*\*240 MHz\*\*: Tools → CPU Frequency → 240MHz                          |
-
-| Menu shows blank game name slot            | `GAME\_NAMES` array out of sync    | Make sure your game's name entry matches its position in the `GameID` enum                      |
-
-| Difficulty setting not saving              | Expected behavior                 | Difficulty resets to Normal on reboot by design — selected fresh each game launch from the menu |
-
-
-
-\---
-
-
-
-\### Clone Hardware Quirks (Common with Cheap Modules)
-
-
-
-| Symptom                                  | Likely Cause                                 | Fix                                                                                      |
-
-| ---------------------------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------- |
-
-| MPU-6050 / GY-521 gyro reads all zeros   | Clone chip — offset registers non-functional | Do \*\*not\*\* write to offset registers (`0x13–0x18`); use software bias correction instead |
-
-| OLED shows mirrored or upside-down image | Clone with different orientation             | Add `display.setRotation(2)` after `display.begin()`                                     |
-
-| ESP32 resets randomly during gameplay    | Insufficient power from USB                  | Try a different USB cable (data cable, not charge-only) or a higher-current charger      |
-
-| ADC readings noisy or unstable           | ESP32 ADC2 used while Wi-Fi active           | Wi-Fi is not used in RETROBOX — if enabled elsewhere, disable it                         |
-
-
+|Symptom|Likely Cause|Fix|
+|-|-|-|
+|MPU-6050 / GY-521 gyro reads all zeros|Clone chip — offset registers non-functional|Do **not** write to offset registers (`0x13–0x18`); use software bias correction instead|
+|OLED shows mirrored or upside-down image|Clone with different orientation|Add `display.setRotation(2)` after `display.begin()`|
+|ESP32 resets randomly during gameplay|Insufficient power from USB|Try a different USB cable (data cable, not charge-only) or a higher-current charger|
+|ADC readings noisy or unstable|ESP32 ADC2 used while Wi-Fi active|Wi-Fi is not used in RETROBOX — if enabled elsewhere, disable it|
 
 Full troubleshooting: [WIRING\_DIAGRAM.md](WIRING_DIAGRAM.md)
 
