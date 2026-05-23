@@ -191,5 +191,7 @@ The ESP32 draws \~80–100 mA during gameplay. A 1000 mAh LiPo gives \~8–10 ho
 
 \---
 
-For build photos and community builds, check the GitHub Discussions tab.
+<img width="720" height="1280" alt="image" src="https://github.com/user-attachments/assets/e1ddf60b-baad-4231-93db-914b72f78c2d" />
+
+
 
