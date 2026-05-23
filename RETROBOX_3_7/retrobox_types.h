@@ -7,6 +7,7 @@ struct Button {
   bool lastState;
   bool pressed;
   bool held;
+  unsigned long lastPressMs;
 };
 
 #define FRAME_MS 33

@@ -8,7 +8,7 @@
 //
 //  QUICK START
 //  ──────────────────────────────────────────────────────────
-//  1. Install libraries (see README.md → Dependencies)
+//  1. Install libraries (see README.md)
 //  2. Open games_config.h to enable/disable games
 //  3. Flash to your ESP32
 //  4. Plug in, play
@@ -209,7 +209,11 @@ bool joyMenuRight(){ return joyAbove(joyX()); }
 // readButtons() consumes the flag and ORs it into btnA.pressed so that
 // even a tap shorter than one 33ms frame is NEVER missed.
 volatile bool btnA_isr_fired = false;
-void IRAM_ATTR btnA_ISR() { btnA_isr_fired = true; }
+volatile unsigned long btnA_isr_lastMs = 0;
+void IRAM_ATTR btnA_ISR() {
+  unsigned long now = millis();
+  if (now - btnA_isr_lastMs > 30) { btnA_isr_fired = true; btnA_isr_lastMs = now; }
+}
 
 // ── Button state (latched edge detector) ─────────────────────
 // pressed latches TRUE on the rising edge and stays true until
@@ -217,10 +221,10 @@ void IRAM_ATTR btnA_ISR() { btnA_isr_fired = true; }
 // This survives any blocking sfx delays that run between
 // readButtons() and the game logic that checks btnX.pressed.
 
-Button btnA     = {BTN_A_PIN,    true, false, false};
-Button btnB     = {BTN_B_PIN,    true, false, false};
-Button btnStart = {BTN_START_PIN,true, false, false};
-Button btnJoySW = {JOY_SW_PIN,   true, false, false};
+Button btnA     = {BTN_A_PIN,    true, false, false,0};
+Button btnB     = {BTN_B_PIN,    true, false, false,0};
+Button btnStart = {BTN_START_PIN,true, false, false,0};
+Button btnJoySW = {JOY_SW_PIN,   true, false, false,0};
 
 void readButtons() {
   // Consume ISR flag FIRST so the rising-edge check below can't clobber it.
@@ -233,7 +237,11 @@ void readButtons() {
 
   auto update = [](Button& b) {
     bool cur = (digitalRead(b.pin) == LOW);
-    if (cur && !b.lastState) b.pressed = true;  // latch, don't overwrite
+   if (cur && !b.lastState) {
+      unsigned long now = millis();
+      if (now - b.lastPressMs > 30) { b.pressed = true; b.lastPressMs = now; 
+    }
+}  // latch, don't overwrite
     b.held      = cur;
     b.lastState = cur;
   };
@@ -1027,6 +1035,7 @@ void loop() {
       gameDraw();
       if (gameIsOver()) {
         saveScore(selectedGame, (int)currentDiff, gameGetScore());
+        ledcWriteTone(0, 0);   
         gameOverEnteredAt = millis();
         appState = STATE_GAME_OVER;
         break;
