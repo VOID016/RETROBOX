@@ -1,10 +1,10 @@
 # RETROBOX
 
-> An open-source handheld retro gaming console built on the \*\*ESP32\*\* microcontroller with a \*\*128×64 SSD1306 OLED\*\* display.
+> An open-source handheld retro gaming console built on the **ESP32** microcontroller with a **128×64 SSD1306 OLED** display.
 
 RETROBOX ships with **8 built-in games** spanning genres from classic arcade puzzlers to a real-time raycaster FPS — all rendered on a monochrome screen no larger than a postage stamp. It is designed for first-time visitors and hobbyists who want a fun, hackable platform to play with and build on.
 
-\---
+---
 
 ## Table of Contents
 
@@ -23,7 +23,7 @@ RETROBOX ships with **8 built-in games** spanning genres from classic arcade puz
 * [Enabling \& Disabling Games](#enabling--disabling-games)
 * [Adding a Custom Game](#adding-a-custom-game)
 
-\---
+---
 
 ## Hardware Controls
 
@@ -35,7 +35,7 @@ RETROBOX ships with **8 built-in games** spanning genres from classic arcade puz
 |**Button B**|Secondary action: run / bomb / strafe-toggle.|
 |**Button START**|Pause / unpause the current game.|
 
-\---
+---
 
 ## Difficulty System
 
@@ -47,7 +47,7 @@ Select your difficulty from the main menu before starting a game. High scores ar
 |**Medium**|The intended, balanced experience.|
 |**Hard**|Faster enemies, higher damage, stricter resource pressure.|
 
-\---
+---
 
 ## Games
 
@@ -101,7 +101,7 @@ An endless vertical-scrolling road game. Pilot a car down a 3-lane highway, dodg
 * Collect every fuel canister; fuel starvation is the #1 cause of death at high speeds.
 * Save nitro for dense traffic clusters, not open road.
 
-\---
+---
 
 ### 🧱 Tetris
 
@@ -131,7 +131,7 @@ Seven classic tetrominoes (I, O, T, S, Z, L, J) fall from the top of a 10-column
 |`LV` + number|Right sidebar|Current level (increments every 10 lines)|
 |`SC` + number|Right sidebar|Score ÷ 100 (truncated to fit)|
 
-> \*\*Note:\*\* The sidebar is only drawn when `PLAY\_W` is wide enough (≥ \~54 px after the board). On very narrow displays the sidebar is hidden; score is not shown on-screen in that case — check it on the game-over screen.
+> **Note:** The sidebar is only drawn when `PLAY_W` is wide enough (≥ \~54 px after the board). On very narrow displays the sidebar is hidden; score is not shown on-screen in that case — check it on the game-over screen.
 
 **Controls**
 
@@ -156,7 +156,7 @@ Seven classic tetrominoes (I, O, T, S, Z, L, J) fall from the top of a 10-column
 * Watch the ghost piece, not the falling piece — it tells you exactly where to commit.
 * Use soft-drop early on to bank points before speed ramps up.
 
-\---
+---
 
 ### 🐍 Snake
 
@@ -205,7 +205,7 @@ Classic Snake on a grid. Your snake starts at length 3 and grows each time it ea
 * Work in a consistent spiral or zigzag pattern to avoid boxing yourself in.
 * Use the direction buffer to flick the joystick before the snake actually moves — useful for tight corners.
 
-\---
+---
 
 ### 🏓 Arkanoid
 
@@ -216,7 +216,7 @@ A faithful brick-breaker. Control a paddle at the bottom to keep a ball bouncing
 **Mechanics**
 
 * Ball angle off the paddle is influenced by **where it lands** — centre = steep, edge = wide.
-* Brick point value = `(BRICK\_ROWS - row) × 10 × level`; top-row bricks score the most.
+* Brick point value = `(BRICK_ROWS - row) × 10 × level`; top-row bricks score the most.
 * 3 lives. Ball falling below the paddle costs one life; resets to paddle centre requiring a manual launch.
 * Ball speed: base `1.8 + level × 0.15`, capped at 3.5. Wave clear applies an extra 1.1× multiplier (cap 4.0).
 * High score auto-saved whenever a new record is set mid-game.
@@ -255,7 +255,7 @@ A faithful brick-breaker. Control a paddle at the bottom to keep a ball bouncing
 * A hit near the paddle edge creates a wide-angle shot useful for corner bricks.
 * Wait for the ball to hover stably over the paddle before pressing A to launch.
 
-\---
+---
 
 ### 🚀 Vertical Shooter
 
@@ -280,7 +280,7 @@ A classic vertical shoot-'em-up (SHMUP). Your triangle-shaped fighter moves free
 |`S:NNNN`|Top-left|Current score|
 |`WN`|Top-centre|Current wave number|
 |`^^^`|Top-right|Remaining lives — one `^` (caret) per life|
-|`B:` + `\*` pips|Bottom-left|Bomb charges: `\*` = available, blank = spent|
+|`B:` + `*` pips|Bottom-left|Bomb charges: `*` = available, blank = spent|
 
 **Controls**
 
@@ -305,7 +305,7 @@ A classic vertical shoot-'em-up (SHMUP). Your triangle-shaped fighter moves free
 * Use bombs when surrounded, not when you're already safe.
 * Prioritise Type 1 and Type 2 enemies; they shoot back and are the main source of damage.
 
-\---
+---
 
 ### 🏰 Dungeon Crawler
 
@@ -340,7 +340,7 @@ A turn-based top-down dungeon crawler with procedurally generated maps. Every ac
 |`X` in a box|In-map|Exit to next floor|
 |Message bar|Bottom 10 px|White-on-black inverted strip showing combat/event messages (e.g. *"Hit o for 2 dmg"*, *"Trap! -2HP!"*). Disappears after \~1.8 s.|
 
-> \*\*Narrow display note:\*\* On screens narrower than 80 px, the status bar uses a shorter format (`HP8/10 L2 S340`) to fit.
+> **Narrow display note:** On screens narrower than 80 px, the status bar uses a shorter format (`HP8/10 L2 S340`) to fit.
 
 **Controls**
 
@@ -365,7 +365,7 @@ A turn-based top-down dungeon crawler with procedurally generated maps. Every ac
 * Serpents (S) are the most dangerous; kill them first before engaging groups.
 * Use corridors to bottleneck enemies and fight one at a time.
 
-\---
+---
 
 ### 🔫 Doom-Nano
 
@@ -431,7 +431,7 @@ A first-person shooter rendered with a classic raycasting engine (in the spirit 
 * Open the minimap when disoriented; the blinking marker shows the exact exit position.
 * Shoot at close range — the hit cone is ±16°, so distant shots can miss.
 
-\---
+---
 
 ### 🍄 Mario Platformer
 
@@ -464,7 +464,7 @@ The most feature-rich game on RETROBOX. A side-scrolling platformer across 16 le
 |`CNNN`|After lives|Total coins collected across all levels (3-digit, e.g. `C012`)|
 |`WN-N`|After coins|Current world and level (e.g. `W1-2` = World 1, Level 2; endless cycles count as extra worlds)|
 |Reserve icon|Top-right area|One-letter abbreviation of the stored reserve item: `M` = Mushroom, `F` = Fire Flower, `T` = Star, `H` = Shield, blank = none|
-|`\*`|Top-right|Appears when Star (invincibility) is active|
+|`*`|Top-right|Appears when Star (invincibility) is active|
 |`S`|Top-right|Appears when Shield is active|
 |Separator line|Row 7|Divides HUD from play area|
 
@@ -509,30 +509,30 @@ The most feature-rich game on RETROBOX. A side-scrolling platformer across 16 le
 * Buy Map Reveal early — hidden blocks in level 14 often contain Stars.
 * Coins accumulate across lives; bank them in the shop for 1UP or 2UP items.
 
-\---
+---
 
 ## Enabling \& Disabling Games
 
-RETROBOX uses a single configuration file — `games\_config.h` — to control which games are compiled in. Comment out a line to remove a game, or un-comment it to add it back:
+RETROBOX uses a single configuration file — `games_config.h` — to control which games are compiled in. Comment out a line to remove a game, or un-comment it to add it back:
 
 ```c
-#define ENABLE\_RACER
-#define ENABLE\_TETRIS
-#define ENABLE\_SNAKE
-#define ENABLE\_ARKANOID
-#define ENABLE\_VSHOOTER
-#define ENABLE\_DUNGEON
-#define ENABLE\_DOOM      // high RAM usage
-#define ENABLE\_MARIO     // high RAM usage
+#define ENABLE_RACER
+#define ENABLE_TETRIS
+#define ENABLE_SNAKE
+#define ENABLE_ARKANOID
+#define ENABLE_VSHOOTER
+#define ENABLE_DUNGEON
+#define ENABLE_DOOM      // high RAM usage
+#define ENABLE_MARIO     // high RAM usage
 ```
 
-> \*\*Note:\*\* DOOM and MARIO use the most RAM. If you hit memory limits after adding custom games, disable one of these two first.
+> **Note:** DOOM and MARIO use the most RAM. If you hit memory limits after adding custom games, disable one of these two first.
 
-\---
+---
 
 ## Adding a Custom Game
 
-Each game lives in its own header file (e.g. `game\_snake.h`) and exposes these functions inside a C++ namespace:
+Each game lives in its own header file (e.g. `game_snake.h`) and exposes these functions inside a C++ namespace:
 
 ```cpp
 void init();          // Called once when the game is selected from the menu.
@@ -543,9 +543,9 @@ int  getScore();      // Returns the current score for high-score tracking.
 bool isNewRecord();   // Returns true if the score just beat the stored high score.
 ```
 
-See [`ADDING\_A\_GAME.md`](ADDING_A_GAME.md) in the repository root for a complete walkthrough and a starter template.
+See [`ADDING_A_GAME.md`](ADDING_A_GAME.md) in the repository root for a complete walkthrough and a starter template.
 
-\---
+---
 
 *Happy gaming! If you find RETROBOX useful, drop a ⭐ on GitHub.*
 

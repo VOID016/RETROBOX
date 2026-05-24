@@ -4,7 +4,7 @@
 
 Built on an **ESP32 DevKit V1** with a 128×64 OLED, analog joystick, 3 buttons, and a piezo buzzer. Flash it, wire it, play it. Adding your own game takes about 30 minutes and only small, well-defined additions to the main `.ino` file.
 
-\---
+---
 
 ## 🎮 Games Included
 
@@ -21,7 +21,7 @@ Built on an **ESP32 DevKit V1** with a 128×64 OLED, analog joystick, 3 buttons,
 
 All games support **Easy / Medium / Hard** difficulty and save high scores to flash memory.
 
-\---
+---
 
 ## ⚡ Hardware
 
@@ -38,9 +38,9 @@ All games support **Easy / Medium / Hard** difficulty and save high scores to fl
 |Resistors|4.7kΩ (×2)|I2C pull-ups: GPIO 22 (SCL) to 3.3V, GPIO 21 (SDA) to 3.3V|
 |Resistor|10kΩ (×1)|Pull-up on Joystick SW (GPIO 25) to 3.3V|
 
-> ⚠️ \\\*\\\*Passive buzzer only.\\\*\\\* An active buzzer will not produce tones — only a fixed click.
+> ⚠️ **Passive buzzer only.** An active buzzer will not produce tones — only a fixed click.
 
-\---
+---
 
 ## 📌 Wiring
 
@@ -60,10 +60,10 @@ All connections at a glance:
 |GPIO 13|Button START|
 |GPIO 26|Buzzer +|
 
-> Buttons use \\\*\\\*internal pull-up resistors\\\*\\\* — no external resistors needed.  
-> Full schematic and troubleshooting: see \\\[WIRING\\\_DIAGRAM.md](WIRING\\\_DIAGRAM.md)
+> Buttons use **internal pull-up resistors** — no external resistors needed.  
+> Full schematic and troubleshooting: see [WIRING_DIAGRAM.md](WIRING_DIAGRAM.md)
 
-\---
+---
 
 ## 🚀 Flashing (Step-by-Step)
 
@@ -78,7 +78,7 @@ All connections at a glance:
 
 ### 2 — Open the project
 
-Open `RETROBOX\\\_3\\\_7.ino` in Arduino IDE. All other `.h` files must stay in the **same folder**.
+Open `RETROBOX_3_7.ino` in Arduino IDE. All other `.h` files must stay in the **same folder**.
 
 ### 3 — Select your board
 
@@ -92,7 +92,7 @@ Connect your ESP32 via USB, select the correct COM port, and click **Upload** (�
 
 The console boots directly to the game select menu.
 
-\---
+---
 
 ## 🎛️ Customizing Your Build
 
@@ -100,27 +100,27 @@ RETROBOX is designed to be modified. Here are the most common things you'll want
 
 ### Enable / Disable Games
 
-Open `games\\\_config.h`. Each game is one line:
+Open `games_config.h`. Each game is one line:
 
 ```cpp
-#define ENABLE\\\_MARIO
-#define ENABLE\\\_DOOM
-#define ENABLE\\\_SNAKE
+#define ENABLE_MARIO
+#define ENABLE_DOOM
+#define ENABLE_SNAKE
 // ... etc.
 ```
 
 Comment out any game you don't want:
 
 ```cpp
-// #define ENABLE\\\_DOOM    ← disabled, won't compile in
-#define ENABLE\\\_SNAKE      ← enabled
+// #define ENABLE_DOOM    ← disabled, won't compile in
+#define ENABLE_SNAKE      ← enabled
 ```
 
 > 💡 If you're running low on RAM, disable `DOOM` or `MARIO` first — they use the most memory.
 
 ### Change Pin Assignments
 
-If your wiring differs from the default, edit the `#define` block at the top of `RETROBOX\\\_3\\\_7.ino`:
+If your wiring differs from the default, edit the `#define` block at the top of `RETROBOX_3_7.ino`:
 
 ```cpp
 #define JOY_X_PIN       34
@@ -143,9 +143,9 @@ If the joystick drifts or feels sluggish, open the **Developer Menu** (hold B + 
 
 The architecture is built for this. Every game is a self-contained C++ namespace in its own `.h` file, exposing exactly **6 functions**. Adding a game requires only small, well-defined additions to `RETROBOX_3_7.ino` — no restructuring of the core firmware.
 
-See [**ADDING\_A\_GAME.md**](ADDING_A_GAME.md) — full walkthrough with a starter template, all available APIs, and tips for hitting 30fps on the ESP32.
+See [**ADDING_A_GAME.md**](ADDING_A_GAME.md) — full walkthrough with a starter template, all available APIs, and tips for hitting 30fps on the ESP32.
 
-\---
+---
 
 ## 🎮 Controls
 
@@ -161,32 +161,32 @@ See [**ADDING\_A\_GAME.md**](ADDING_A_GAME.md) — full walkthrough with a start
 
 > 🕹️ There may or may not be something hidden in this firmware. Poke around.
 
-\---
+---
 
 ## 📁 Project Structure
 
 ```
 RETROBOX/
-├── RETROBOX\_3\_7/
-│   ├── RETROBOX\_3\_7.ino       Main firmware
-│   ├── games\_config.h         ← Start here to enable/disable games
-│   ├── retrobox\_types.h       Shared types (Button, Difficulty, etc.)
-│   ├── game\_racer.h           Top-Down Racer
-│   ├── game\_tetris.h          Tetris
-│   ├── game\_snake.h           Snake
-│   ├── game\_arkanoid.h        Arkanoid
-│   ├── game\_vshooter.h        Vertical Shooter
-│   ├── game\_dungeon.h         Dungeon Crawler
-│   ├── game\_doom.h            DOOM-Nano raycaster
-│   └── game\_mario.h           Mario Platformer
-├── ADDING\_A\_GAME.md           How to write your own game
-├── WIRING\_DIAGRAM.md          Hardware assembly + troubleshooting
-├── GAME\_MANUAL.md             Game instructions and controls
+├── RETROBOX_3_7/
+│   ├── RETROBOX_3_7.ino       Main firmware
+│   ├── games_config.h         ← Start here to enable/disable games
+│   ├── retrobox_types.h       Shared types (Button, Difficulty, etc.)
+│   ├── game_racer.h           Top-Down Racer
+│   ├── game_tetris.h          Tetris
+│   ├── game_snake.h           Snake
+│   ├── game_arkanoid.h        Arkanoid
+│   ├── game_vshooter.h        Vertical Shooter
+│   ├── game_dungeon.h         Dungeon Crawler
+│   ├── game_doom.h            DOOM-Nano raycaster
+│   └── game_mario.h           Mario Platformer
+├── ADDING_A_GAME.md           How to write your own game
+├── WIRING_DIAGRAM.md          Hardware assembly + troubleshooting
+├── GAME_MANUAL.md             Game instructions and controls
 ├── README.md                  This file
 └── LICENSE                    MIT License
 ```
 
-\---
+---
 
 ## 🔋 Power Options
 
@@ -196,9 +196,9 @@ RETROBOX/
 |3.7V LiPo battery|Add a TP4056 charge module with protection circuit|
 |3× AA batteries|Use a 3.3V regulator to step down from \~4.5V|
 
-> The ESP32 draws \\\~80–100mA during gameplay. A 1000mAh LiPo lasts roughly 8–10 hours.
+> The ESP32 draws \~80–100mA during gameplay. A 1000mAh LiPo lasts roughly 8–10 hours.
 
-\---
+---
 
 ## 🐛 Common Issues
 
@@ -207,7 +207,7 @@ RETROBOX/
 |Issue|Cause|Fix|
 |-|-|-|
 |Screen flickers or shows garbage|Loose SDA/SCL wire|Re-seat the OLED connections at GPIO 21/22|
-|Screen blank after flashing|Wrong I2C address|Change `OLED\\\_ADDR` from `0x3C` to `0x3D` in the `.ino`|
+|Screen blank after flashing|Wrong I2C address|Change `OLED_ADDR` from `0x3C` to `0x3D` in the `.ino`|
 |Screen blank, address correct|OLED on 5V|Move OLED VCC to the **3.3V** pin — 5V will damage it|
 |Joystick cursor drifts at rest|ADC noise / clone module|Open the Developer Menu (hold B + START) → sensitivity page → decrease sensitivity toward 1 to widen the dead zone|
 |Joystick feels sluggish|Dead zone too wide|Open the Developer Menu → sensitivity page → increase sensitivity toward 10 to narrow the dead zone|
@@ -221,13 +221,13 @@ RETROBOX/
 
 |Issue|Cause|Fix|
 |-|-|-|
-|Compilation error: "too large for RAM"|Too many games enabled|Disable `DOOM` and/or `MARIO` in `games\\\_config.h` — they use the most RAM|
-|Compilation error after adding custom game|Missing dispatcher entry, missing `#ifdef`/`#include` block in the `.ino`, or missing `TUTORIALS[]` entry — all three cause compile errors|Re-read Steps 2, 5, and 6 of `ADDING\\\_A\\\_GAME.md` — the `#ifdef`/`#include` block, the `TUTORIALS[]` entry, and all 6 dispatcher `case` statements must be present|
+|Compilation error: "too large for RAM"|Too many games enabled|Disable `DOOM` and/or `MARIO` in `games_config.h` — they use the most RAM|
+|Compilation error after adding custom game|Missing dispatcher entry, missing `#ifdef`/`#include` block in the `.ino`, or missing `TUTORIALS[]` entry — all three cause compile errors|Re-read Steps 2, 5, and 6 of `ADDING_A_GAME.md` — the `#ifdef`/`#include` block, the `TUTORIALS[]` entry, and all 6 dispatcher `case` statements must be present|
 |High scores reset on every boot|Preferences namespace collision|Make sure no two games use the same key string in `prefs.putInt()`|
-|Game crashes / reboots mid-play|Stack overflow or heap exhaustion|Reduce `MAX\\\_LEN` / array sizes in your custom game, or disable another game to free RAM|
+|Game crashes / reboots mid-play|Stack overflow or heap exhaustion|Reduce `MAX_LEN` / array sizes in your custom game, or disable another game to free RAM|
 |Dungeon Crawler freezes on boot|`malloc()` failed|Not enough heap — disable one or two other games|
-|DOOM runs slowly|Normal on lower clock speeds|In `RETROBOX\\\_3\\\_7.ino`, change `setCpuFrequencyMhz(80)` to `setCpuFrequencyMhz(240)` in `setup()` and reflash — the firmware sets the CPU speed at runtime, overriding the IDE menu setting|
-|Menu shows blank game name slot|`GAME\\\_NAMES` array out of sync|Make sure your game's name entry matches its position in the `GameID` enum|
+|DOOM runs slowly|Normal on lower clock speeds|In `RETROBOX_3_7.ino`, change `setCpuFrequencyMhz(80)` to `setCpuFrequencyMhz(240)` in `setup()` and reflash — the firmware sets the CPU speed at runtime, overriding the IDE menu setting|
+|Menu shows blank game name slot|`GAME_NAMES` array out of sync|Make sure your game's name entry matches its position in the `GameID` enum|
 |Difficulty setting not saving|Expected behavior|Difficulty resets to Medium on reboot by design — selected fresh each game launch|
 
 ### Clone Hardware Quirks
@@ -239,14 +239,14 @@ RETROBOX/
 |ESP32 resets randomly during gameplay|Insufficient power from USB|Try a different USB cable (data cable, not charge-only) or a higher-current charger|
 |ADC readings noisy or unstable|ESP32 ADC2 used while Wi-Fi active|Wi-Fi is not used in RETROBOX — if enabled elsewhere, disable it|
 
-Full troubleshooting: [WIRING\_DIAGRAM.md](WIRING_DIAGRAM.md)
+Full troubleshooting: [WIRING_DIAGRAM.md](WIRING_DIAGRAM.md)
 
-\---
+---
 
 ## 📜 License
 
 MIT — free to use, modify, build upon, and distribute. See [LICENSE](LICENSE).
 
-\---
+---
 
 *Built with ❤️ for the maker community.*
