@@ -1,6 +1,6 @@
 # RETROBOX
 
-> An open-source handheld retro gaming console built on the **ESP32** microcontroller with a **128×64 SSD1306 OLED** display.
+> An open-source handheld retro gaming console built on the \*\*ESP32\*\* microcontroller with a \*\*128×64 SSD1306 OLED\*\* display.
 
 RETROBOX ships with **8 built-in games** spanning genres from classic arcade puzzlers to a real-time raycaster FPS — all rendered on a monochrome screen no larger than a postage stamp. It is designed for first-time visitors and hobbyists who want a fun, hackable platform to play with and build on.
 
@@ -69,14 +69,15 @@ An endless vertical-scrolling road game. Pilot a car down a 3-lane highway, dodg
 **HUD**
 
 
-| Element | Position | Meaning |
+
+|Element|Position|Meaning|
 |-|-|-|
-| `S:NNNN` | Top-left | Current score |
-| `[♥][♥][♥]` | Top-centre | Remaining lives (filled squares, 1 per life) |
-| `LN` | Top-right | Current speed level |
-| Fuel bar | Bottom-left half | Remaining fuel — depletes constantly; collect **F** pickups to refill |
-| Nitro pips | Bottom-right half | Up to 3 charges; filled = available, outline = spent |
-| `N!` | Bottom-right | Appears while nitro is active |
+|`S:NNNN`|Top-left|Current score|
+|`\[♥]\[♥]\[♥]`|Top-centre|Remaining lives (filled squares, 1 per life)|
+|`LN`|Top-right|Current speed level|
+|Fuel bar|Bottom-left half|Remaining fuel — depletes constantly; collect **F** pickups to refill|
+|Nitro pips|Bottom-right half|Up to 3 charges; filled = available, outline = spent|
+|`N!`|Bottom-right|Appears while nitro is active|
 
 **Controls**
 
@@ -121,15 +122,16 @@ Seven classic tetrominoes (I, O, T, S, Z, L, J) fall from the top of a 10-column
 **HUD**
 
 
-| Element | Position | Meaning |
-|-|-|-|
-| Board outline | Left side | 10×(up to 20) cell play field |
-| Ghost piece | In-board | Outline of where the active piece will land |
-| `NXT` + preview | Right sidebar | The next tetromino shown at 3×3 px per block |
-| `LV` + number | Right sidebar | Current level (increments every 10 lines) |
-| `SC` + number | Right sidebar | Score ÷ 100 (truncated to fit) |
 
-> **Note:** The sidebar is only drawn when `PLAY_W` is wide enough (≥ ~54 px after the board). On very narrow displays the sidebar is hidden; score is not shown on-screen in that case — check it on the game-over screen.
+|Element|Position|Meaning|
+|-|-|-|
+|Board outline|Left side|10×(up to 20) cell play field|
+|Ghost piece|In-board|Outline of where the active piece will land|
+|`NXT` + preview|Right sidebar|The next tetromino shown at 3×3 px per block|
+|`LV` + number|Right sidebar|Current level (increments every 10 lines)|
+|`SC` + number|Right sidebar|Score ÷ 100 (truncated to fit)|
+
+> \*\*Note:\*\* The sidebar is only drawn when `PLAY\_W` is wide enough (≥ \~54 px after the board). On very narrow displays the sidebar is hidden; score is not shown on-screen in that case — check it on the game-over screen.
 
 **Controls**
 
@@ -174,11 +176,12 @@ Classic Snake on a grid. Your snake starts at length 3 and grows each time it ea
 **HUD**
 
 
-| Element | Position | Meaning |
+
+|Element|Position|Meaning|
 |-|-|-|
-| `S:NNNN` | Top-left | Current score (10 pts per food eaten) |
-| `L:N` | Top-right | Remaining lives (starts at 3; a wall or self-collision costs 1) |
-| Separator line | Row 8 | Divides HUD from play area |
+|`S:NNNN`|Top-left|Current score (10 pts per food eaten)|
+|`L:N`|Top-right|Remaining lives (starts at 3; a wall or self-collision costs 1)|
+|Separator line|Row 8|Divides HUD from play area|
 
 > The level number is not shown in the HUD — speed increases are silent. Watch the snake's movement tempo to judge current level.
 
@@ -213,7 +216,7 @@ A faithful brick-breaker. Control a paddle at the bottom to keep a ball bouncing
 **Mechanics**
 
 * Ball angle off the paddle is influenced by **where it lands** — centre = steep, edge = wide.
-* Brick point value = `(BRICK_ROWS - row) × 10 × level`; top-row bricks score the most.
+* Brick point value = `(BRICK\_ROWS - row) × 10 × level`; top-row bricks score the most.
 * 3 lives. Ball falling below the paddle costs one life; resets to paddle centre requiring a manual launch.
 * Ball speed: base `1.8 + level × 0.15`, capped at 3.5. Wave clear applies an extra 1.1× multiplier (cap 4.0).
 * High score auto-saved whenever a new record is set mid-game.
@@ -221,13 +224,14 @@ A faithful brick-breaker. Control a paddle at the bottom to keep a ball bouncing
 **HUD**
 
 
-| Element | Position | Meaning |
+
+|Element|Position|Meaning|
 |-|-|-|
-| `S:NNNN` | Top-left | Current score |
-| `L:N` | Top-centre | Remaining lives (starts at 3) |
-| `W:N` | Top-right | Current wave / level number |
-| Separator line | Row 8 | Divides HUD from play area |
-| `A = LAUNCH` | Lower-centre | Reminder shown when ball is held on paddle, waiting for launch |
+|`S:NNNN`|Top-left|Current score|
+|`L:N`|Top-centre|Remaining lives (starts at 3)|
+|`W:N`|Top-right|Current wave / level number|
+|Separator line|Row 8|Divides HUD from play area|
+|`A = LAUNCH`|Lower-centre|Reminder shown when ball is held on paddle, waiting for launch|
 
 **Controls**
 
@@ -270,12 +274,13 @@ A classic vertical shoot-'em-up (SHMUP). Your triangle-shaped fighter moves free
 **HUD**
 
 
-| Element | Position | Meaning |
+
+|Element|Position|Meaning|
 |-|-|-|
-| `S:NNNN` | Top-left | Current score |
-| `WN` | Top-centre | Current wave number |
-| `^^^` | Top-right | Remaining lives — one `^` (caret) per life |
-| `B:` + `*` pips | Bottom-left | Bomb charges: `*` = available, blank = spent |
+|`S:NNNN`|Top-left|Current score|
+|`WN`|Top-centre|Current wave number|
+|`^^^`|Top-right|Remaining lives — one `^` (caret) per life|
+|`B:` + `\*` pips|Bottom-left|Bomb charges: `\*` = available, blank = spent|
 
 **Controls**
 
@@ -321,20 +326,21 @@ A turn-based top-down dungeon crawler with procedurally generated maps. Every ac
 **HUD**
 
 
-| Element | Position | Meaning |
-|-|-|-|
-| `HP N/N` | Top-left | Current HP / maximum HP |
-| `LvN` | Top-centre | Current dungeon floor / level |
-| `ScN` | Top-right | Cumulative score |
-| Separator line | Row 11 | Divides status bar from dungeon view |
-| `@` | In-map | Your character's position |
-| Enemy symbols | In-map | `g` = Goblin, `o` = Orc, `T` = Troll, `S` = Serpent |
-| `p` | In-map | Potion pickup |
-| Chest outline | In-map | Treasure chest |
-| `X` in a box | In-map | Exit to next floor |
-| Message bar | Bottom 10 px | White-on-black inverted strip showing combat/event messages (e.g. *"Hit o for 2 dmg"*, *"Trap! -2HP!"*). Disappears after ~1.8 s. |
 
-> **Narrow display note:** On screens narrower than 80 px, the status bar uses a shorter format (`HP8/10 L2 S340`) to fit.
+|Element|Position|Meaning|
+|-|-|-|
+|`HP N/N`|Top-left|Current HP / maximum HP|
+|`LvN`|Top-centre|Current dungeon floor / level|
+|`ScN`|Top-right|Cumulative score|
+|Separator line|Row 11|Divides status bar from dungeon view|
+|`@`|In-map|Your character's position|
+|Enemy symbols|In-map|`g` = Goblin, `o` = Orc, `T` = Troll, `S` = Serpent|
+|`p`|In-map|Potion pickup|
+|Chest outline|In-map|Treasure chest|
+|`X` in a box|In-map|Exit to next floor|
+|Message bar|Bottom 10 px|White-on-black inverted strip showing combat/event messages (e.g. *"Hit o for 2 dmg"*, *"Trap! -2HP!"*). Disappears after \~1.8 s.|
+
+> \*\*Narrow display note:\*\* On screens narrower than 80 px, the status bar uses a shorter format (`HP8/10 L2 S340`) to fit.
 
 **Controls**
 
@@ -383,19 +389,20 @@ A first-person shooter rendered with a classic raycasting engine (in the spirit 
 **HUD**
 
 
-| Element | Position | Meaning |
+
+|Element|Position|Meaning|
 |-|-|-|
-| 3-D view | Upper portion | Raycasted walls with 4-level distance shading; floor scanlines; black ceiling |
-| Gun sprite | Lower-centre of 3-D view | Shotgun with recoil and muzzle-flash animation |
-| Enemy HP bar | Above enemy sprite | 12 px wide bar, visible when an Imp is within 8 tiles |
-| Separator line | At `viewH` | Divides 3-D view from HUD strip |
-| `HP` + filled bar | HUD left | Player health — full bar = 44 px wide; shrinks as you take damage |
-| `LN` | HUD centre-left | Current level number |
-| `SN` | HUD centre | Score |
-| Compass `(⊙)` | HUD far-right | Rotating needle always pointing toward the exit tile |
-| `ST` | Top-right (in-view) | Appears only while Button B is held (strafe mode active) |
-| Minimap overlay | Top-left (when toggled) | 2 px/tile map of the current floor with a blinking exit marker and player arrow |
-| Hurt flash | Screen-centre | Brief white flash in the centre pixels when the player takes a hit |
+|3-D view|Upper portion|Raycasted walls with 4-level distance shading; floor scanlines; black ceiling|
+|Gun sprite|Lower-centre of 3-D view|Shotgun with recoil and muzzle-flash animation|
+|Enemy HP bar|Above enemy sprite|12 px wide bar, visible when an Imp is within 8 tiles|
+|Separator line|At `viewH`|Divides 3-D view from HUD strip|
+|`HP` + filled bar|HUD left|Player health — full bar = 44 px wide; shrinks as you take damage|
+|`LN`|HUD centre-left|Current level number|
+|`SN`|HUD centre|Score|
+|Compass `(⊙)`|HUD far-right|Rotating needle always pointing toward the exit tile|
+|`ST`|Top-right (in-view)|Appears only while Button B is held (strafe mode active)|
+|Minimap overlay|Top-left (when toggled)|2 px/tile map of the current floor with a blinking exit marker and player arrow|
+|Hurt flash|Screen-centre|Brief white flash in the centre pixels when the player takes a hit|
 
 **Controls**
 
@@ -450,25 +457,26 @@ The most feature-rich game on RETROBOX. A side-scrolling platformer across 16 le
 **HUD**
 
 
-| Element | Position | Meaning |
+
+|Element|Position|Meaning|
 |-|-|-|
-| `MxNN` | Top-left | Lives remaining (e.g. `Mx03` = 3 lives) |
-| `CNNN` | After lives | Total coins collected across all levels (3-digit, e.g. `C012`) |
-| `WN-N` | After coins | Current world and level (e.g. `W1-2` = World 1, Level 2; endless cycles count as extra worlds) |
-| Reserve icon | Top-right area | One-letter abbreviation of the stored reserve item: `M` = Mushroom, `F` = Fire Flower, `T` = Star, `H` = Shield, blank = none |
-| `*` | Top-right | Appears when Star (invincibility) is active |
-| `S` | Top-right | Appears when Shield is active |
-| Separator line | Row 7 | Divides HUD from play area |
+|`MxNN`|Top-left|Lives remaining (e.g. `Mx03` = 3 lives)|
+|`CNNN`|After lives|Total coins collected across all levels (3-digit, e.g. `C012`)|
+|`WN-N`|After coins|Current world and level (e.g. `W1-2` = World 1, Level 2; endless cycles count as extra worlds)|
+|Reserve icon|Top-right area|One-letter abbreviation of the stored reserve item: `M` = Mushroom, `F` = Fire Flower, `T` = Star, `H` = Shield, blank = none|
+|`\*`|Top-right|Appears when Star (invincibility) is active|
+|`S`|Top-right|Appears when Shield is active|
+|Separator line|Row 7|Divides HUD from play area|
 
 **Shop HUD** (between levels):
 
-| Element | Description |
+|Element|Description|
 |-|-|
-| Inverted header bar | "ITEM SHOP" title in black-on-white |
-| `Coins: NNN` | Your current coin balance |
-| Item detail box | Name, description, and cost of the highlighted item |
-| Item carousel | 4 items shown at once; selected item is highlighted (inverted); `<` / `>` arrows when more items exist off-screen |
-| `A=buy  B=next lvl` | Button reminder at the bottom |
+|Inverted header bar|"ITEM SHOP" title in black-on-white|
+|`Coins: NNN`|Your current coin balance|
+|Item detail box|Name, description, and cost of the highlighted item|
+|Item carousel|4 items shown at once; selected item is highlighted (inverted); `<` / `>` arrows when more items exist off-screen|
+|`A=buy  B=next lvl`|Button reminder at the bottom|
 
 **Controls**
 
@@ -489,9 +497,9 @@ The most feature-rich game on RETROBOX. A side-scrolling platformer across 16 le
 
 |Level|Details|
 |-|-|
-|Easy|Fewer enemies (cap 6), slower walk/run (320/540), enemies at 0.62× speed.|
+|Easy|Fewer enemies (cap 6), slower walk/run (320/540), enemies at 0.70× speed.|
 |Medium|Standard speeds (380/620), standard enemies.|
-|Hard|Faster walk/run (425/670), enemies at 1.25× speed, Boss has 6 HP.|
+|Hard|Faster walk/run (425/670), enemies at 1.42× speed, Boss has 6 HP.|
 
 **Tips**
 
@@ -505,38 +513,39 @@ The most feature-rich game on RETROBOX. A side-scrolling platformer across 16 le
 
 ## Enabling \& Disabling Games
 
-RETROBOX uses a single configuration file — `games_config.h` — to control which games are compiled in. Comment out a line to remove a game, or un-comment it to add it back:
+RETROBOX uses a single configuration file — `games\_config.h` — to control which games are compiled in. Comment out a line to remove a game, or un-comment it to add it back:
 
 ```c
-#define ENABLE_RACER
-#define ENABLE_TETRIS
-#define ENABLE_SNAKE
-#define ENABLE_ARKANOID
-#define ENABLE_VSHOOTER
-#define ENABLE_DUNGEON
-#define ENABLE_DOOM      // high RAM usage
-#define ENABLE_MARIO     // high RAM usage
+#define ENABLE\_RACER
+#define ENABLE\_TETRIS
+#define ENABLE\_SNAKE
+#define ENABLE\_ARKANOID
+#define ENABLE\_VSHOOTER
+#define ENABLE\_DUNGEON
+#define ENABLE\_DOOM      // high RAM usage
+#define ENABLE\_MARIO     // high RAM usage
 ```
 
-> **Note:** DOOM and MARIO use the most RAM. If you hit memory limits after adding custom games, disable one of these two first.
+> \*\*Note:\*\* DOOM and MARIO use the most RAM. If you hit memory limits after adding custom games, disable one of these two first.
 
 \---
 
 ## Adding a Custom Game
 
-Each game lives in its own header file (e.g. `game_snake.h`) and exposes these functions inside a C++ namespace:
+Each game lives in its own header file (e.g. `game\_snake.h`) and exposes these functions inside a C++ namespace:
 
 ```cpp
 void init();          // Called once when the game is selected from the menu.
-void update();        // Called every frame (~30 fps). Reads inputs and advances game state.
+void update();        // Called every frame (\~30 fps). Reads inputs and advances game state.
 void draw();          // Called every frame after update(). Renders to the display buffer.
 bool isOver();        // Returns true when the game-over condition is met.
 int  getScore();      // Returns the current score for high-score tracking.
 bool isNewRecord();   // Returns true if the score just beat the stored high score.
 ```
 
-See [`ADDING_A_GAME.md`](ADDING_A_GAME.md) in the repository root for a complete walkthrough and a starter template.
+See [`ADDING\_A\_GAME.md`](ADDING_A_GAME.md) in the repository root for a complete walkthrough and a starter template.
 
 \---
 
 *Happy gaming! If you find RETROBOX useful, drop a ⭐ on GitHub.*
+
